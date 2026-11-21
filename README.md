@@ -1,16 +1,127 @@
-# React + Vite
+🎬 QuickShow – Movie Ticket Booking App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+QuickShow is a full-stack movie ticket booking web application. Users can browse movies, view details and showtimes, pick seats, and book tickets online.
 
-Currently, two official plugins are available:
+✨ Features
+Browse current and upcoming movies
+Movie details with genre, release year and runtime
+Theatre and showtime listings
+Seat selection and ticket booking
+User login / authentication
+Favourite movies list
+Background jobs and event handling with Inngest
+Responsive, modern UI
+🛠️ Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Client
 
-## React Compiler
+React (Vite)
+Tailwind CSS
+ESLint
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Server
 
-## Expanding the ESLint configuration
+Node.js
+Express.js
+MongoDB (Mongoose models)
+Inngest (background jobs / events)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Deployment
+
+Vercel (both client and server include a vercel.json)
+📁 Project Structure
+movie-ticket-booking/
+├── client/                 # Frontend (React + Vite)
+│   ├── index.html
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── eslint.config.js
+│   └── vercel.json
+│
+└── server/                 # Backend (Node + Express)
+    ├── config/             # Database & app configuration
+    ├── controllers/        # Route handlers / business logic
+    ├── inngest/            # Inngest functions and client
+    ├── lib/                # Helper utilities
+    ├── middlewares/        # Auth and other middlewares
+    ├── models/             # Mongoose schemas
+    ├── routes/             # API routes
+    ├── server.js           # Entry point
+    ├── package.json
+    └── vercel.json
+🚀 Getting Started
+Prerequisites
+Node.js (v18 or later)
+npm
+A MongoDB database (local or Atlas)
+1. Clone the repository
+bash
+git clone <your-repo-url>
+cd movie-ticket-booking
+2. Setup the server
+bash
+cd server
+npm install
+
+Create a .env file in the server folder:
+
+env
+PORT=3000
+MONGODB_URI=your_mongodb_connection_string
+
+# Add any other keys your app uses (auth, Inngest, payments, etc.)
+
+Start the server:
+
+bash
+npm run server
+# or
+node server.js
+3. Setup the client
+bash
+cd client
+npm install
+
+Create a .env file in the client folder:
+
+env
+VITE_BASE_URL=http://localhost:3000
+
+Start the development server:
+
+bash
+npm run dev
+
+The app will be available at http://localhost:5173.
+
+📜 Available Scripts
+
+Client
+
+Command	Description
+npm run dev	Start the Vite dev server
+npm run build	Build for production
+npm run preview	Preview the production build
+npm run lint	Run ESLint
+
+Server
+
+Command	Description
+npm start	Start the server
+npm run server	Start the server in watch mode
+
+Adjust script names to match your package.json.
+
+🌐 Deployment
+
+Both the client and the server can be deployed to Vercel. Each folder contains its own vercel.json, so deploy them as two separate projects and set the environment variables in the Vercel dashboard.
+
+🤝 Contributing
+Fork the repository
+Create a feature branch: git checkout -b feature/your-feature
+Commit your changes: git commit -m "Add your feature"
+Push the branch: git push origin feature/your-feature
+Open a Pull Request
+📄 License
+
+This project is licensed under the MIT License.
