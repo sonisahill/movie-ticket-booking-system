@@ -1,0 +1,39 @@
+require("dotenv").config()
+const express = require("express")
+const cors = require("cors")
+const {clerkMiddleware} = require('@clerk/express')
+const { serve } = require("inngest/express")
+const { inngest, functions } = require("./inngest/index.js")
+const showRouter = require("./routes/show.router")
+const connectDB = require("./config/db")
+const bookingRouter = require("./routes/booking.router.js")
+const stripeWebhooks = require('./controllers/stripeWebhooks')
+const adminrouter = require("./routes/admin.router.js")
+const userRouter = require("./routes/user.router.js")
+const theatersRouter = require("./routes/theater.router.js")
+const app = express()
+const port = Number(process.env.PORT) || 5000
+
+// middlewares
+app.use(cors())
+app.use(express.json())
+app.use(clerkMiddleware())
+
+
+connectDB()
+
+app.get('/',(req,res)=>{
+    res.send("server is Live")
+})
+app.use("/api/inngest", serve({ client: inngest, functions }));
+app.use('/api/shows',showRouter)
+// Stripe webhook: must use raw body parser for signature verification
+app.post('/api/booking/webhook', express.raw({ type: 'application/json' }), stripeWebhooks.handleWebhook)
+app.use('/api/booking', bookingRouter)
+app.use('/api/admin',adminrouter)
+app.use('/api/user', userRouter)
+app.use('/api/theatres',theatersRouter)
+
+app.listen(port, () => {
+    console.log("server is running on server",port)
+})
